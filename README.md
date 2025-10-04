@@ -2,6 +2,13 @@
 
 This repository defines a 1D hydraulic network (pipes + junctions + boundary nodes) in a single YAML file and computes the pressure drop across each component.
 
+```bash
+${python} -m
+scripts.compute_pressure_drop
+-i ./data/raw/gsca_network.yaml
+-o ./data/final/gsca_pressure_drop.csv
+```
+
 ## Top-Level Fields
 
 - `name` — label for the network run
