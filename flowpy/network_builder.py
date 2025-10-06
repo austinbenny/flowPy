@@ -3,7 +3,7 @@ from typing import Callable
 import yaml
 
 from .flow_network_components import Inlet, Junction, Network, Outlet, Pipe
-from .form_loss_idelchick import (
+from .loss_utils import (
     beveled_contraction_alpha60,
     beveled_contraction_alpha140,
     discharge_from_straight_tube_to_baffle,
@@ -14,7 +14,7 @@ from .form_loss_idelchick import (
     sudden_contraction,
     sudden_expansion,
 )
-from .pdrop_funcs import (
+from .geom_utils import (
     area_annulus,
     area_capsule_slot,
     area_circle,

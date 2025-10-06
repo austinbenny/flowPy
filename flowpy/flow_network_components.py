@@ -33,6 +33,11 @@ class Network:
     name: str
     network_list: List[Inlet | Outlet | Junction | Pipe]
 
+    results: pd.DataFrame = field(init=False)
+
+    def __post_init__(self):
+        self.results = self.create_summary_df()
+
     # Column catalog with SI units (order defines default display order)
     ALL_COLUMNS: ClassVar[Dict[str, str]] = {
         "name": None,
@@ -115,12 +120,10 @@ class Network:
         return df
 
     def write_summary(self, csv_path: Path | str) -> None:
-        df = self.create_summary_df()
-
         for col, unit in self.ALL_COLUMNS.items():
             if unit == "kPa":
                 # Divide corresponding column by 1000
-                df[col] = df[col] / 1000
+                self.results[col] = self.results[col] / 1000
 
         # Build headers with units where available
         def header_with_unit(col: str) -> str:
@@ -130,8 +133,9 @@ class Network:
                 return f"{col} [{unit}]"
             return col
 
-        headers = [header_with_unit(c) for c in df.columns]
-        df.to_csv(csv_path, index=False, header=headers, float_format="%.3G")
+        headers = [header_with_unit(c) for c in self.results.columns]
+        csv_path.mkdir(parents=True, exist_ok=True)
+        self.results.to_csv(csv_path, index=False, header=headers, float_format="%.3G")
 
 
 @dataclass
