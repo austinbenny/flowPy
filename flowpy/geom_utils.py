@@ -1,6 +1,7 @@
 from __future__ import annotations
 import math
 
+from typing import Callable
 
 def area_circle(D: float) -> float:
     """Area of a circle with diameter D."""
@@ -122,3 +123,13 @@ def hydraulic_diameter_capsule_slot(b: float, L: float) -> float:
     A = b * L + math.pi * (b**2) / 4.0
     Pw = 2.0 * L + math.pi * b
     return 4.0 * A / Pw
+
+
+GEOM_REGISTRY: dict[str, Callable[..., float]] = {
+    "area_circle": area_circle,
+    "area_annulus": area_annulus,
+    "hydraulic_diameter_annulus": hydraulic_diameter_annulus,
+    "hydraulic_diameter_circle": hydraulic_diameter_circle,
+    "hydraulic_diameter_capsule_slot": hydraulic_diameter_capsule_slot,
+    "area_capsule_slot": area_capsule_slot,
+}

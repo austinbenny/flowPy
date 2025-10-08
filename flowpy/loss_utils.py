@@ -2,6 +2,7 @@ from __future__ import annotations
 import math
 import numpy as np
 
+from typing import Callable
 
 def sudden_contraction(inlet_area: float, outlet_area: float) -> float:
     """
@@ -329,3 +330,15 @@ def beveled_contraction_alpha140(
     zeta_pp = float(np.interp(bevel_length / hydraulic_diameter, x, y))
 
     return zeta_pp * (1.0 - r) ** 0.75
+
+LOSS_REGISTRY: dict[str, Callable[..., float]] = {
+    "f_annulus_turbulent": f_annulus_turbulent,
+    "free_discharge": free_discharge,
+    "sudden_expansion": sudden_expansion,
+    "beveled_contraction_alpha60": beveled_contraction_alpha60,
+    "beveled_contraction_alpha140": beveled_contraction_alpha140,
+    "sharp_thick_inlet_facing_baffle": sharp_thick_inlet_facing_baffle,
+    "discharge_from_straight_tube_to_baffle": discharge_from_straight_tube_to_baffle,
+    "smooth_cone_diffuser_nar1": smooth_cone_diffuser_nar1,
+    "sudden_contraction": sudden_contraction,
+}

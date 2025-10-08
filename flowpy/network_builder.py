@@ -1,48 +1,8 @@
-from typing import Callable
-
 import yaml
 
 from .flow_network_components import Inlet, Junction, Network, Outlet, Pipe
-from .loss_utils import (
-    beveled_contraction_alpha60,
-    beveled_contraction_alpha140,
-    discharge_from_straight_tube_to_baffle,
-    f_annulus_turbulent,
-    free_discharge,
-    sharp_thick_inlet_facing_baffle,
-    smooth_cone_diffuser_nar1,
-    sudden_contraction,
-    sudden_expansion,
-)
-from .geom_utils import (
-    area_annulus,
-    area_capsule_slot,
-    area_circle,
-    hydraulic_diameter_annulus,
-    hydraulic_diameter_capsule_slot,
-    hydraulic_diameter_circle,
-)
-
-GEOM_REGISTRY: dict[str, Callable[..., float]] = {
-    "area_circle": area_circle,
-    "area_annulus": area_annulus,
-    "hydraulic_diameter_annulus": hydraulic_diameter_annulus,
-    "hydraulic_diameter_circle": hydraulic_diameter_circle,
-    "hydraulic_diameter_capsule_slot": hydraulic_diameter_capsule_slot,
-    "area_capsule_slot": area_capsule_slot,
-}
-
-LOSS_REGISTRY: dict[str, Callable[..., float]] = {
-    "f_annulus_turbulent": f_annulus_turbulent,
-    "free_discharge": free_discharge,
-    "sudden_expansion": sudden_expansion,
-    "beveled_contraction_alpha60": beveled_contraction_alpha60,
-    "beveled_contraction_alpha140": beveled_contraction_alpha140,
-    "sharp_thick_inlet_facing_baffle": sharp_thick_inlet_facing_baffle,
-    "discharge_from_straight_tube_to_baffle": discharge_from_straight_tube_to_baffle,
-    "smooth_cone_diffuser_nar1": smooth_cone_diffuser_nar1,
-    "sudden_contraction": sudden_contraction,
-}
+from .loss_utils import LOSS_REGISTRY
+from .geom_utils import GEOM_REGISTRY
 
 
 def resolve_refs(
