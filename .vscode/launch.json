@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gsca_network_compute",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${command:python.interpreterPath}",
+            "module": "scripts.compute_pressure_drop",
+            "console": "integratedTerminal",
+            "args": [
+                "-i",
+                "./data/raw/gsca_network.yaml",
+                "-o",
+                "./data/final/gsca_pressure_drop.csv"
+            ]
+        }
+    ]
+}
